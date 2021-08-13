@@ -29,5 +29,6 @@ class _BotCommands:
         self.UpdateCommand = 'update'
         self.ExecHelpCommand = 'exechelp'
         self.TsHelpCommand = 'tshelp'
+        self.UsageCommand = 'usage'
 
 BotCommands = _BotCommands()
