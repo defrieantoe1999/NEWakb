@@ -17,7 +17,7 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, usage, delete, speedtest, count, config, updates
 
 
 def stats(update, context):
@@ -135,6 +135,8 @@ def bot_help(update, context):
 /{BotCommands.UpdateCommand}: Update Bot from Upstream Repo (Owner Only)
 
 /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only)
 
 /{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
 
