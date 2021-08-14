@@ -135,8 +135,7 @@ def get_readable_message():
                     # if hasattr(download, 'is_torrent'):
                     try:
                         msg += f"\n<b>Info🐳🧲🍐=  Seeders🐳: </b> <code>{download.aria_download().num_seeders}</code>" \
-                            f" | <b>Peers🍐:</b> <code>{download.aria_download().connections}</code>" \
-                            f" | <b>leech 🧲:</b> <code>{download.aria_download().num_leechs}</code>"
+                            f" | <b>Peers🍐:</b> <code>{download.aria_download().connections}</code>"
                     except:
                         pass
                     try:
