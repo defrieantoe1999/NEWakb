@@ -125,9 +125,9 @@ def get_readable_message():
                     if download.status() == MirrorStatus.STATUS_CLONING:
                         msg += f"\n<b>Cloned:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                     elif download.status() == MirrorStatus.STATUS_UPLOADING:
-                        msg += f"\n<b>Ukuran File Yang diupload:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
+                        msg += f"\n<b>Uploaded:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                     else:
-                        msg += f"\n<b>💽File yang Kedownload:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
+                        msg += f"\n<b>Downloaded:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                     msg += f"\n<b>🔶🔷Kecepatan Internet⚡️:</b> <code>{download.speed()}</code>" \
                             f", <b>🕓Perkiraan selesai⏳:</b> <code>{download.eta()}</code> "
                     # if hasattr(download, 'is_torrent'):
