@@ -1,8 +1,8 @@
 class DirectDownloadLinkException(Exception):
-    """Not method found for extracting direct download link from the http link"""
+    """Yah Link yang kamu kirim ke bot aku gk support nich :("""
     pass
 
 
 class NotSupportedExtractionArchive(Exception):
-    """The archive format use is trying to extract is not supported"""
+    """Yah File Archive kamu gk support sama bot aku hiksd :("""
     pass
