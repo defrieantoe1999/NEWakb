@@ -134,8 +134,7 @@ def get_readable_message():
                             f", <b>🕓Perkiraan selesai⏳:-</b> <code>{download.eta()}</code> "
                     # if hasattr(download, 'is_torrent'):
                     try:
-                        msg += f"\n<b>Info🐳🧲🍐= </b>" \
-                            f" | <b>Seeders🐳: <code>{download.aria_download().num_seeders}</code>" \
+                        msg += f"\n<b>Info🐳🧲🍐=  Seeders🐳: </b> <code>{download.aria_download().num_seeders}</code>" \
                             f" | <b>Peers🍐:</b> <code>{download.aria_download().connections}</code>" \
                             f" | <b>leech 🧲:</b> <code>{download.torrent_info().num_leechs}</code>"
                     except:
