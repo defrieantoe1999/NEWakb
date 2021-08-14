@@ -118,8 +118,8 @@ def get_readable_message():
         for download in list(download_dict.values()):
             INDEX += 1
             if INDEX > COUNT:
-                msg += f"<b>📂Nama File/Folder:</b> <code>{download.name()}</code>"
-                msg += f"\n<b>Status👨‍OTW💻:</b> <i>{download.status()}</i>"
+                msg += f"<b>Filename:</b> <code>{download.name()}</code>"
+                msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
                 if download.status() != MirrorStatus.STATUS_ARCHIVING and download.status() != MirrorStatus.STATUS_EXTRACTING:
                     msg += f"\n<code>{get_progress_bar_string(download)} {download.progress()}</code>"
                     if download.status() == MirrorStatus.STATUS_CLONING:
