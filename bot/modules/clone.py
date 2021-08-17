@@ -5,7 +5,7 @@ from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.mirror_utils.status_utils.clone_status import CloneStatus
 from bot import dispatcher, LOGGER, CLONE_LIMIT, STOP_DUPLICATE, download_dict, download_dict_lock, Interval
-from bot.helper.ext_utils.bot_utils import get_readable_file_size
+from bot.helper.ext_utils.bot_utils import get_readable_file_size, check_limit
 import random
 import string
 
@@ -15,39 +15,31 @@ def cloneNode(update, context):
     if len(args) > 1:
         link = args[1]
         gd = gdriveTools.GoogleDriveHelper()
-        res, clonesize, name, files = gd.clonehelper(link)
+        res, size, name, files = gd.clonehelper(link)
         if res != "":
             sendMessage(res, context.bot, update)
             return
         if STOP_DUPLICATE:
-            LOGGER.info(f"Checking File/Folder if already in Drive...")
+            LOGGER.info(f"Ngecek File/Folder mengko nek wis enek...")
             smsg, button = gd.drive_list(name)
             if smsg:
-                msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
+                msg3 = "File/Folder Sudah ada dalam drive CUK.\nIni file yang kamu cari:"
                 sendMarkup(msg3, context.bot, update, button)
                 return
         if CLONE_LIMIT is not None:
-            LOGGER.info(f"Checking File/Folder Size...")
-            limit = CLONE_LIMIT
-            limit = limit.split(' ', maxsplit=1)
-            limitint = int(limit[0])
-            msg2 = f'Failed, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
-            if 'G' in limit[1] or 'g' in limit[1]:
-                if clonesize > limitint * 1024**3:
-                    sendMessage(msg2, context.bot, update)
-                    return
-            elif 'T' in limit[1] or 't' in limit[1]:
-                if clonesize > limitint * 1024**4:
-                    sendMessage(msg2, context.bot, update)
-                    return              
+            result = check_limit(size, CLONE_LIMIT)
+            if result:
+                msg2 = f'GAGAL, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
+                sendMessage(msg2, context.bot, update)
+                return
         if files < 15:
-            msg = sendMessage(f"Cloning: <code>{link}</code>", context.bot, update)
+            msg = sendMessage(f"OTW Ngopi file : <code>{link}</code>", context.bot, update)
             result, button = gd.clone(link)
             deleteMessage(context.bot, msg)
         else:
             drive = gdriveTools.GoogleDriveHelper(name)
             gid = ''.join(random.SystemRandom().choices(string.ascii_letters + string.digits, k=12))
-            clone_status = CloneStatus(drive, clonesize, update, gid)
+            clone_status = CloneStatus(drive, size, update, gid)
             with download_dict_lock:
                 download_dict[update.message.message_id] = clone_status
             sendStatusMessage(update, context.bot)
@@ -76,7 +68,7 @@ def cloneNode(update, context):
         else:
             sendMarkup(result + cc, context.bot, update, button)
     else:
-        sendMessage('Provide G-Drive Shareable Link to Clone.', context.bot, update)
+        sendMessage('Berikan Link google drive untuk memulai kloning.', context.bot, update)
 
 clone_handler = CommandHandler(BotCommands.CloneCommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(clone_handler)
