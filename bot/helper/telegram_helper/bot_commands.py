@@ -4,6 +4,7 @@ class _BotCommands:
         self.MirrorCommand = 'koco'
         self.UnzipMirrorCommand = 'unzipkoco'
         self.TarMirrorCommand = 'tarkoco'
+        self.ZipMirrorCommand = 'zipmirror'
         self.CancelMirror = 'batal'
         self.CancelAllCommand = 'gagal'
         self.ListCommand = 'list'
