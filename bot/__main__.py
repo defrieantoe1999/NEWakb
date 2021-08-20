@@ -149,7 +149,7 @@ def bot_help(update, context):
 
 /ts: pertolongan Untuk mencari torrent .
 
-/weebhelp: Get help for anime, manga and character module.
+/weebu: Get help for anime, manga and character module.
 
 /stickerhelp: Get help for stickers module.
 '''
